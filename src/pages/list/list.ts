@@ -4,31 +4,74 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { ItemDetailsPage } from '../item-details/item-details';
 
+import { Storage } from '@ionic/storage';
+
+
+
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
+
+
 export class ListPage {
   icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  items: Array<{title: string, icon: string, status: boolean}>;
+  numMesas: number;
+  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+    this.icons = ['ios-restaurant'];
+    this.numMesas =0;
+    this.items =[];
+    
 
-    this.items = [];
-    for(let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+
+/*     this.storage.length().then(result => { this.numMesas = result});
+    this.storage.length().then(result => { 
+       for (let i = 1; i < result; i++) {
+        this.storage.get('Mesa '+ i).then(result => { this.items.push(result)});
+        }}); */
   }
 
-  itemTapped(event, item) {
-    this.navCtrl.push(ItemDetailsPage, {
-      item: item
+  
+  changeStatus(i: number){
+    this.items[i].status = !this.items[i].status;
+    //this.storage.set(this.items[i].title, this.items[i]); 
+  }
+  addMesa(){
+    this.numMesas = this.numMesas + 1;
+    this.items.push({
+      title: 'Mesa ' + String(this.numMesas),
+      icon: this.icons[0],
+      status: true
     });
+    //this.storage.set(this.items[i].title, this.items[i]);
+    
+  }
+
+  removeMesa(){
+    this.items.pop();
+    //this.storage.remove('Mesa ' + this.numMesas);
+    if (this.numMesas >= 1){
+      this.numMesas = this.numMesas - 1;
+    } 
+    
+    
+  }
+
+  getData(key){
+    this.storage.get(key).then(result =>{
+    return result});
+  }
+
+  setData(key, data){
+    this.storage.set(key, data).then(result => {console.log(result)});
+  }
+
+  getLength(){
+    this.storage.length().then(result => {
+      return result});
+    
   }
 }

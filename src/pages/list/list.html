@@ -1,20 +1,20 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>My First List</ion-title>
+    <ion-title>Mesas</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+    <button  ion-button  margin color = "secondary" (click)= "addMesa()">Add</button>
+    <button  ion-button   color="danger" (click)= "removeMesa()">Del</button>
+    
+    <button ion-item *ngFor="let item of items; let i = index" (click)= "changeStatus(i)" >
       <ion-icon name="{{item.icon}}" item-left></ion-icon>
       {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
-      </div>
+      <button item-right ion-button color="secondary" clear *ngIf="item.status">Disponível</button>
+      <button item-right ion-button color="danger" clear *ngIf="!item.status">Ocupada</button>  
+      
     </button>
   </ion-list>
 </ion-content>
