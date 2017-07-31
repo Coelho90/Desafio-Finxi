@@ -3,7 +3,7 @@ Esse APP faz parte de um desafio para o processo seletivo da Finxi.
 O APP é um controlador de Mesas em um restaurante.
 
 
-O APP apresente 3 funções interativas.
+O APP apresenta 3 funções interativas.
 
 O botão "Add" adiciona uma mesa à lista com status disponível.
 
