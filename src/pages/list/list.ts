@@ -14,7 +14,7 @@ import { Storage } from '@ionic/storage';
 })
 
 
-export class ListPage {
+export class MesasPage {
   icons: string[];
   items: Array<{title: string, icon: string, status: boolean}>;
   numMesas: number;
