@@ -1,8 +1,5 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Mesas</ion-title>
   </ion-navbar>
 </ion-header>
@@ -12,11 +9,11 @@
     <button  ion-button  margin color = "secondary" (click)= "addMesa()">Add</button>
     <button  ion-button   color="danger" (click)= "removeMesa()">Del</button>
     
-    <button ion-item *ngFor="let item of items; let i = index" (click)= "changeStatus(i)" >
+    <button ion-item *ngFor="let item of items; let i = index" >
       <ion-icon name="{{item.icon}}" item-left></ion-icon>
       {{item.title}}
-      <button item-right ion-button color="secondary" clear *ngIf="item.status">Disponível</button>
-      <button item-right ion-button color="danger" clear *ngIf="!item.status">Ocupada</button>  
+      <button item-right ion-button color="secondary" clear *ngIf="item.status" (click)= "changeStatus(i)" >Disponível</button>
+      <button item-right ion-button color="danger" clear *ngIf="!item.status" (click)= "changeStatus(i)" >Ocupada</button>  
       
     </button>
   </ion-list>

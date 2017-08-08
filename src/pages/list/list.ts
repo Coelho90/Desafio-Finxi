@@ -21,9 +21,11 @@ export class MesasPage {
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+
     this.icons = ['ios-restaurant'];
     this.numMesas =0;
     this.items =[];
+    
     
 
 
