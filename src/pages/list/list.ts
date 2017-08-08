@@ -22,39 +22,40 @@ export class MesasPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 
-    this.icons = ['ios-restaurant'];
-    this.numMesas =0;
-    this.items =[];
-    
-    
-
-
-/*     this.storage.length().then(result => { this.numMesas = result});
+    this.icons = ['ios-restaurant'];  
+    this.storage.length().then(result => { this.numMesas = result});
+    console.log(this.numMesas);
     this.storage.length().then(result => { 
-       for (let i = 1; i < result; i++) {
-        this.storage.get('Mesa '+ i).then(result => { this.items.push(result)});
-        }}); */
+      for (let i = 1; i < result; i++) {
+        this.storage.get('Mesa '+ i).then(result => { this.items.push(result)}).catch(() => this.items =[]) ;
+        console.log(this.items);
+    }});
+    
+    
+    
+
   }
 
   
   changeStatus(i: number){
     this.items[i].status = !this.items[i].status;
-    //this.storage.set(this.items[i].title, this.items[i]); 
+    this.storage.set(this.items[i].title, this.items[i]); 
   }
   addMesa(){
-    this.numMesas = this.numMesas + 1;
+    
     this.items.push({
-      title: 'Mesa ' + String(this.numMesas),
+      title: 'Mesa ' + String(this.numMesas + 1),
       icon: this.icons[0],
       status: true
     });
-    //this.storage.set(this.items[i].title, this.items[i]);
+    this.storage.set(this.items[this.numMesas].title, this.items[this.numMesas]);
+    this.numMesas = this.numMesas + 1;
     
   }
 
   removeMesa(){
     this.items.pop();
-    //this.storage.remove('Mesa ' + this.numMesas);
+    this.storage.remove('Mesa ' + this.numMesas);
     if (this.numMesas >= 1){
       this.numMesas = this.numMesas - 1;
     } 
