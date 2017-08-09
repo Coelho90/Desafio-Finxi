@@ -6,6 +6,10 @@ import { ItemDetailsPage } from '../item-details/item-details';
 
 import { Storage } from '@ionic/storage';
 
+import { OrdersPage } from '../orders/orders';
+
+
+
 
 
 @Component({
@@ -58,5 +62,10 @@ export class MesasPage {
     if (this.numMesas >= 1){
       this.numMesas = this.numMesas - 1;
     }  
+  }
+
+    itemTapped(event, item) {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(OrdersPage);
   }
 }
